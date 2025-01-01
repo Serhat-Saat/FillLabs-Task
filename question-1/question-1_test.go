@@ -53,21 +53,25 @@ func TestSortWords(t *testing.T) {
 			[]string{"2", "5"},
 			[]string{"2", "5"},
 		},
-	}
-
-	for _, test := range tests {
-		t.Run(fmt.Sprintf("Input: %v", test.input), func(t *testing.T) {
-			result := sortWords(test.input)
-			//Checks if the result is equal to the expected output.
-			if !reflect.DeepEqual(result, test.expected) {
-				t.Errorf("Expexted %v, but %v turned", test.expected, result)
-			}
-		})
+		{
+			// Strings and Number
+			[]string{"asdf", "5", "qwrsfa", "asasgasf"},
+			[]string{"asasgasf", "qwrsfa", "asdf", "5"},
+		},
 	}
 
 	fmt.Println("All tests have been completed. Inputs and outputs tested:")
 	for _, test := range tests {
-		fmt.Printf("Input: %v\n", test.input)
-		fmt.Printf("Output: %v\n\n", sortWords(test.input))
+		t.Run(fmt.Sprintf("Input: %v", test.input), func(t *testing.T) {
+			// Print the input for each test case
+			fmt.Printf("Input: %v\n", test.input)
+			fmt.Printf("Expected Output: %v\n", test.expected)
+			result := sortWords(test.input)
+			fmt.Printf("Actual Output: %v\n\n", result)
+			//Checks if the result is equal to the expected output.
+			if !reflect.DeepEqual(result, test.expected) {
+				t.Errorf("Expected %v, but got %v", test.expected, result)
+			}
+		})
 	}
 }

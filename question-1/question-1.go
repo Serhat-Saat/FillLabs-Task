@@ -27,7 +27,7 @@ func sortWords(words []string) []string {
 
 func main() {
 	input := []string{"aaaasd", "a", "aab", "aaabcd", "ef", "csssssssd", "fdz", "kf", "zc", "lklklklklklklkl", "l"}
-	sortedWords := sortWords(input)
 	fmt.Println("Words To Sort:", input)
+	sortedWords := sortWords(input)
 	fmt.Println("Sorted Words:", sortedWords)
 }
