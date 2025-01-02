@@ -30,6 +30,7 @@ const UserModal: React.FC<UserModalProps> = ({
   const [userPhone, setUserPhone] = useState(user?.userPhone || "");
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [phoneError, setPhoneError] = useState<string | null>(null);
 
   const formatPhoneNumber = (input: string) => {
     const numericValue = input.replace(/\D/g, "");
@@ -39,7 +40,15 @@ const UserModal: React.FC<UserModalProps> = ({
   };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserPhone(formatPhoneNumber(e.target.value));
+    const formattedPhone = formatPhoneNumber(e.target.value);
+    setUserPhone(formattedPhone);
+
+    const numericPhone = formattedPhone.replace(/\D/g, "");
+    if (numericPhone.length < 10) {
+      setPhoneError("Phone number must be 10 digits!");
+    } else {
+      setPhoneError(null);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -51,6 +60,15 @@ const UserModal: React.FC<UserModalProps> = ({
       setShowDeleteConfirmation(true);
       setIsProcessing(false);
       return;
+    }
+
+    const numericPhone = userPhone.replace(/\D/g, "");
+    if (numericPhone.length !== 10) {
+      setPhoneError("Phone number must be 10 digits");
+      setIsProcessing(false);
+      return;
+    } else {
+      setPhoneError(null);
     }
 
     const newUser = {
@@ -148,7 +166,9 @@ const UserModal: React.FC<UserModalProps> = ({
                   onChange={handlePhoneChange}
                   required
                   readOnly={action === "delete"}
+                  maxLength={14}
                 />
+                {phoneError && <p className="error-message">{phoneError}</p>}
               </label>
               <div className="modal-actions">
                 {action === "delete" ? (

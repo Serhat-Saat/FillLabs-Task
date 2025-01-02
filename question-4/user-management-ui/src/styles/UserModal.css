@@ -160,3 +160,9 @@ input[readonly] {
 .confirmation-modal-actions button:last-child:hover {
   background-color: #5a6268;
 }
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
