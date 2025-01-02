@@ -4,15 +4,16 @@ import (
 	"fmt"
 )
 
-// The function that finds the most repeating element
+// The function that finds the most repeating item
 func mostRepeated(data []string) string {
 	if len(data) == 0 {
 		return "" // Return empty string for empty list
 	}
 
+	//Initialize frequency of each item
 	frequency := make(map[string]int)
 
-	// Calculate the frequency of each element
+	// Calculate the frequency of each item
 	for _, item := range data {
 		frequency[item]++
 	}
