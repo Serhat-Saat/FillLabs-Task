@@ -32,6 +32,7 @@ const UserModal: React.FC<UserModalProps> = ({
   const [isProcessing, setIsProcessing] = useState(false);
   const [phoneError, setPhoneError] = useState<string | null>(null);
 
+  // Helper function to format phone numbers
   const formatPhoneNumber = (input: string) => {
     const numericValue = input.replace(/\D/g, "");
     if (numericValue.length === 0) return "(5)";
@@ -39,6 +40,7 @@ const UserModal: React.FC<UserModalProps> = ({
     return `(${numericValue.slice(0, 3)})${numericValue.slice(3, 10)}`;
   };
 
+  // Handles phone input change and validation
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formattedPhone = formatPhoneNumber(e.target.value);
     setUserPhone(formattedPhone);
@@ -51,11 +53,14 @@ const UserModal: React.FC<UserModalProps> = ({
     }
   };
 
+  // Handles form submission for creating, editing, or deleting users
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // Prevent form submission if the request is already being processed
     if (isProcessing) return;
     setIsProcessing(true);
 
+    // If action is delete, show delete confirmation modal
     if (action === "delete") {
       setShowDeleteConfirmation(true);
       setIsProcessing(false);
@@ -63,6 +68,7 @@ const UserModal: React.FC<UserModalProps> = ({
     }
 
     const numericPhone = userPhone.replace(/\D/g, "");
+    // Validate phone number length before submitting
     if (numericPhone.length !== 10) {
       setPhoneError("Phone number must be 10 digits");
       setIsProcessing(false);
@@ -72,13 +78,14 @@ const UserModal: React.FC<UserModalProps> = ({
     }
 
     const newUser = {
-      id: user?.id || Date.now(),
+      id: user?.id || Date.now(), // Use existing user ID or generate a new one
       userName,
       userEmail,
       userPhone: userPhone.replace(/\D/g, ""),
     };
 
     try {
+      // Determine URL and HTTP method based on action (create or update)
       const url =
         action === "create"
           ? "http://localhost:8080/users/create"
@@ -98,7 +105,7 @@ const UserModal: React.FC<UserModalProps> = ({
       setIsProcessing(false);
     }
   };
-
+  // Handles user deletion confirmation
   const handleDeleteConfirm = async () => {
     if (isProcessing || !user) return;
     setIsProcessing(true);

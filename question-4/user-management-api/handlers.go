@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 	"user-management-api/errors"
@@ -123,8 +122,6 @@ func DeleteUserHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	idStr := r.URL.Query().Get("id")
-	fmt.Println(r.URL.Query())
-	fmt.Println(idStr)
 	if idStr == "" {
 		http.Error(w, "ID parametresi gerekli", http.StatusBadRequest)
 		return
