@@ -221,13 +221,13 @@ const UserModal: React.FC<UserModalProps> = ({
                   className="delete-button"
                   disabled={isProcessing}
                 >
-                  Evet
+                  Yes
                 </button>
                 <button
                   onClick={() => setShowDeleteConfirmation(false)}
                   className="cancel-button"
                 >
-                  Hayır
+                  Back
                 </button>
               </div>
             </div>
