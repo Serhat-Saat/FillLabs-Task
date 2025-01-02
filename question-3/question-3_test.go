@@ -6,9 +6,7 @@ import (
 	"testing"
 )
 
-// Test Function
 func TestMostRepeated(t *testing.T) {
-	// Test situations
 	tests := []struct {
 		input    []string
 		expected string
