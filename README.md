@@ -62,6 +62,18 @@ You may follow the steps below to use the project on your computer.
    ```bash
    npm run dev
 ---
+Main Page
+![Main Page](question-4/user-management-ui/src/assets/main-page.png)
+Create User Modal
+![Create User Modal](question-4/user-management-ui/src/assets/create-user-modal.png)
+Edit User Modal
+![Edit User Modal](question-4/user-management-ui/src/assets/edit-user-modal.png)
+Delete User Modal
+![Delete User Modal](question-4/user-management-ui/src/assets/delete-user-modal.png)
+Confirmation Modal
+
+![Confirmation Modal](question-4/user-management-ui/src/assets/confirmation-modal.png)
+---
 
 ## Contact
 
